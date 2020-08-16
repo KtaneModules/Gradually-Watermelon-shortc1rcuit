@@ -1,0 +1,12 @@
+Gradually Watermelon
+I like shapes.
+
+Module ID: graduallyWatermelon
+
+Created by Short_c1rcuit
+Idea by Asew54321
+
+Manual available here: https://ktane.timwi.de/HTML/Gradually%20Watermelon.html
+
+Build 1.0 notes:
+Initial release
