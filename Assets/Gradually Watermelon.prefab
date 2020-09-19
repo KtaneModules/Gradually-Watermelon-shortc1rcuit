@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 114841298784140712}
   - component: {fileID: 114333620530664194}
   - component: {fileID: 114854904612704232}
+  - component: {fileID: 114200079448980870}
   m_Layer: 0
   m_Name: Gradually Watermelon
   m_TagString: Untagged
@@ -862,6 +863,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderNames:
   - KT/Mobile/DiffuseTint
+--- !u!114 &114200079448980870
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1338002230354334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -289456416, guid: 45b809be76fd7a3468b6f517bced6f28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Settings: '{"songClipsOn":true}'
+  SettingsPath: 
 --- !u!114 &114207277175192264
 MonoBehaviour:
   m_ObjectHideFlags: 1

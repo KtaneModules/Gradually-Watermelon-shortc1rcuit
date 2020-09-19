@@ -10,10 +10,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Newtonsoft.Json;
 using KModkit;
 
 public class GraduallyWatermelon : MonoBehaviour
 {
+	//Setting to turn the song clips on and off
+	public class MySettings
+	{
+		public bool songClipsOn;
+	}
+
+	//Accesses the settings in the json
+	KMModSettings modSettings;
+	MySettings settings;
+
 	//Gets audio clips and info about the bomb.
 	public KMAudio audio;
 	public KMBombInfo bomb;
@@ -142,6 +153,9 @@ public class GraduallyWatermelon : MonoBehaviour
 	//Done when the bomb starts
 	void OnActivate()
 	{
+		modSettings = GetComponent<KMModSettings>();
+		settings = JsonConvert.DeserializeObject<MySettings>(modSettings.Settings);
+
 		//Randomises the song displayed at the bottom
 		currentSong = Random.Range(0, 25);
 		song.text = songNames[currentSong];
@@ -229,7 +243,10 @@ public class GraduallyWatermelon : MonoBehaviour
 
 		if (song.text == songNames[selectedSong])
 		{
-			audio.PlaySoundAtTransform(lyrics[selectedSong][selectedLyric, 1], transform);
+			if (settings.songClipsOn)
+			{
+				audio.PlaySoundAtTransform(lyrics[selectedSong][selectedLyric, 1], transform);
+			}
 			stage += 1;
 			Debug.LogFormat("[Gradually Watermelon #{0}] Correct!", moduleId);
 		}
