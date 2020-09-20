@@ -10,3 +10,6 @@ Manual available here: https://ktane.timwi.de/HTML/Gradually%20Watermelon.html
 
 Build 1.0 notes:
 Initial release
+
+Build 1.1 notes:
+Added a setting to the module to turn on and off the song clips
