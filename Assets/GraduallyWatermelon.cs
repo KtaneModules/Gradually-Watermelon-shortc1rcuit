@@ -88,9 +88,9 @@ public class GraduallyWatermelon : MonoBehaviour
 	private bool moduleSolved;
 
 	//Twitch help message
-#pragma warning disable 414
+    #pragma warning disable 414
 	private readonly string TwitchHelpMessage = @"Submit your answer with “!{0} submit <song name>”.";
-#pragma warning restore 414
+    #pragma warning restore 414
 
 	public IEnumerator ProcessTwitchCommand(string command)
 	{
@@ -106,24 +106,85 @@ public class GraduallyWatermelon : MonoBehaviour
 				input = "señorita";
 			}
 
-			//Cycle through the song list until you get the desired song.
-			for (int i = 0; i < 25; i++)
-			{
-				if (song.text.ToLowerInvariant() != input)
-				{
-					yield return null;
-					right.OnInteract();
-					yield return new WaitForSecondsRealtime(0.1f);
-				}
-			}
+            //Get number of times it would take to go left or right to desired song
+            bool available = true;
+            int index = currentSong;
+            int lcount = 0, rcount = 0;
+            while (index != selectedSong)
+            {
+                index++;
+                if (index == 25)
+                    index = 0;
+                if (index == currentSong)
+                {
+                    available = false;
+                    rcount = 0;
+                    break;
+                }
+                rcount++;
+            }
+            if (available)
+            {
+                index = currentSong;
+                while (index != selectedSong)
+                {
+                    index--;
+                    if (index == -1)
+                        index = 24;
+                    lcount++;
+                }
+            }
 
-			//However, if you cycle through all the different posibilities without the desired one appearing then send an error message 
+            //Determine which direction takes least number of times to desired song and cycle to it
+            if (lcount < rcount)
+            {
+                for (int i = 0; i < lcount; i++)
+                {
+                    if (song.text.ToLowerInvariant() != input)
+                    {
+                        yield return null;
+                        left.OnInteract();
+                        yield return new WaitForSecondsRealtime(0.1f);
+                    }
+                }
+            }
+            else if (lcount > rcount)
+            {
+                for (int i = 0; i < rcount; i++)
+                {
+                    if (song.text.ToLowerInvariant() != input)
+                    {
+                        yield return null;
+                        right.OnInteract();
+                        yield return new WaitForSecondsRealtime(0.1f);
+                    }
+                }
+            }
+            else
+            {
+                int rando = Random.Range(0, 2);
+                for (int i = 0; i < (rando == 0 ? lcount : rcount); i++)
+                {
+                    if (song.text.ToLowerInvariant() != input)
+                    {
+                        yield return null;
+                        if (rando == 0)
+                            left.OnInteract();
+                        else
+                            right.OnInteract();
+                        yield return new WaitForSecondsRealtime(0.1f);
+                    }
+                }
+            }
+
+			//However, if the desired song is not available then send an error message 
 			if (song.text.ToLowerInvariant() != input)
 			{
 				yield return "sendtochaterror The inputted song is not available.";
+                yield break;
 			}
 
-			//Once you have set the display to the desired output then submit
+			//Once you have set the display to the desired output then submit if it was available
 			yield return null;
 			submit.OnInteract();
 		}
@@ -133,6 +194,17 @@ public class GraduallyWatermelon : MonoBehaviour
 			yield return "sendtochaterror The inputted command is not valid.";
 		}
 	}
+
+    //Twitch autosolver
+    IEnumerator TwitchHandleForcedSolve()
+    {
+        int start = stage;
+        for (int i = start; i < 3; i++)
+        {
+            yield return ProcessTwitchCommand("submit " + songNames[selectedSong]);
+            yield return new WaitForSecondsRealtime(0.1f);
+        }
+    }
 
 	void Awake()
 	{
@@ -207,7 +279,7 @@ public class GraduallyWatermelon : MonoBehaviour
 		left.AddInteractionPunch();
 
 		//Makes a sound when you press the button
-		audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
+		audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, left.transform);
 
 		//Goes left 1 the list
 		currentSong = (currentSong + 24) % 25;
@@ -219,10 +291,10 @@ public class GraduallyWatermelon : MonoBehaviour
 		if (moduleSolved) return;
 
 		//Makes the bomb move when you press it
-		left.AddInteractionPunch();
+		right.AddInteractionPunch();
 
 		//Makes a sound when you press the button
-		audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
+		audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, right.transform);
 
 		//Goes right 1 the list
 		currentSong = (currentSong + 1) % 25;
@@ -234,10 +306,10 @@ public class GraduallyWatermelon : MonoBehaviour
 		if (moduleSolved) return;
 
 		//Makes the bomb move when you press it
-		left.AddInteractionPunch();
+		submit.AddInteractionPunch();
 
 		//Makes a sound when you press the button
-		audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
+		audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, submit.transform);
 
 		Debug.LogFormat("[Gradually Watermelon #{0}] You submitted {1}.", moduleId, song.text);
 
