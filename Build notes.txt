@@ -8,8 +8,19 @@ Idea by Asew54321
 
 Manual available here: https://ktane.timwi.de/HTML/Gradually%20Watermelon.html
 
+Based off of the video's from here: https://www.youtube.com/user/malineka146
+
 Build 1.0 notes:
 Initial release
 
 Build 1.1 notes:
 Added a setting to the module to turn on and off the song clips
+
+Build 1.2 notes:
+- Fixed the corrupting text issue (The version with the corrupted text can be found here: https://github.com/shortc1rcuit/Broken-Gradually-Watermelon )
+- Fixed the displays, text, and highlights from floating
+- Added Gamepad support and a TP autosolver
+- Revamped the TP support so its faster and does not press submit if something invalid is given
+- Minor fixes to interaction punches and press sounds
+
+A big thank you to eXish for this update

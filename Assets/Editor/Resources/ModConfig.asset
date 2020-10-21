@@ -18,7 +18,12 @@ MonoBehaviour:
     by Short_c1rcuit\r\nIdea by Asew54321\n\r\nManual available here: https://ktane.timwi.de/HTML/Gradually%20Watermelon.html\n\r\nBased
     off of the video's from here: https://www.youtube.com/user/malineka146\n\nBuild
     1.0 notes:\r\nInitial release\n\nBuild 1.1 notes:\nAdded a setting to the module
-    to turn on and off the song clips"
-  version: 1.1
+    to turn on and off the song clips\n\nBuild 1.2 notes:\n- Fixed the corrupting
+    text issue (The version with the corrupted text can be found here: https://github.com/shortc1rcuit/Broken-Gradually-Watermelon
+    )\n- Fixed the displays, text, and highlights from floating\r\n- Added Gamepad
+    support and a TP autosolver\r\n- Revamped the TP support so its faster and does
+    not press submit if something invalid is given\r\n- Minor fixes to interaction
+    punches and press sounds\n\nA big thank you to eXish for this update"
+  version: 1.2
   outputFolder: build
   previewImage: {fileID: 2800000, guid: b6312a5ea847a9447b297d1a12c42e12, type: 3}
