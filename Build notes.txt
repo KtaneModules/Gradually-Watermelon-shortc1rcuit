@@ -24,3 +24,6 @@ Build 1.2 notes:
 - Minor fixes to interaction punches and press sounds
 
 A big thank you to eXish for this update
+
+Build 1.3 notes:
+Fixed Into The Unknown's sound clips not playing
