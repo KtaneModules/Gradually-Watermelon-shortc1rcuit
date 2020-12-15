@@ -24,7 +24,8 @@ MonoBehaviour:
     support and a TP autosolver\r\n- Revamped the TP support so its faster and does
     not press submit if something invalid is given\r\n- Minor fixes to interaction
     punches and press sounds\n\nA big thank you to eXish for this update\n\nBuild
-    1.3 notes:\nFixed Into The Unknown's sound clips not playing"
-  version: 1.3
+    1.3 notes:\nFixed Into The Unknown's sound clips not playing\n\nBuild 1.4 notes:\nSwapped
+    out an audio clip"
+  version: 1.4
   outputFolder: build
   previewImage: {fileID: 2800000, guid: b6312a5ea847a9447b297d1a12c42e12, type: 3}

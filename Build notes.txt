@@ -27,3 +27,6 @@ A big thank you to eXish for this update
 
 Build 1.3 notes:
 Fixed Into The Unknown's sound clips not playing
+
+Build 1.4 notes:
+Swapped out an audio clip
